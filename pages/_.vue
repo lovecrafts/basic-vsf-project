@@ -9,6 +9,7 @@ import { ref } from '@vue/composition-api';
 import { apolloClient } from '@vue-storefront/commercetools-api';
 import { onSSR } from '@vue-storefront/core';
 import gql from 'graphql-tag';
+import { Logger } from '@vue-storefront/core'
 
 
 const query = gql`
@@ -19,6 +20,8 @@ const query = gql`
 
 export default {
     setup(props, context) {
+        Logger.info('Test info');
+        Logger.error('Test Error');
         const result = ref(null);
         onSSR(async () => {
             await new Promise((resolve, reject) => {

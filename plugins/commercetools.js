@@ -2,8 +2,8 @@ import { setup } from '@vue-storefront/commercetools-api';
 import { Logger } from '@vue-storefront/core'
 import { setContext } from 'apollo-link-context';
 import { ApolloLink, Observable } from 'apollo-link';
-//import { winstonLogger } from '../utils/lcLogger.js';
-//import { logger } from '../utils/lcLogger.js';
+import { registerLogger } from '@vue-storefront/core'
+import { winstonLogger } from '../utils/lcLogger.js';
 
 function createLink(req) {
     const logLink = setContext((_, { headers }) => {
@@ -30,8 +30,7 @@ function createLink(req) {
 }
 
 export default (context) => {
-    //winstonLogger.error('Test Error 1');
-    Logger.error('Test Error 2');
+    registerLogger(() => winstonLogger);
     setup({
         api: {},
         customOptions: {

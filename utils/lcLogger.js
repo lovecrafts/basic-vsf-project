@@ -1,5 +1,3 @@
-'use strict;'
-
 import * as winston from 'winston';
 import BrowserConsole from 'winston-transport-browserconsole';
 
@@ -16,13 +14,4 @@ if (process.server) {
     winstonLogger.add(new winston.transports.File({ filename: 'testLog.log' }));
 }
 
-//export { winstonLogger };
-
-const logger = {
-    debug: winstonLogger.debug,
-    info: winstonLogger.info,
-    warn: winstonLogger.warn,
-    error: winstonLogger.error
-};
-
-export { logger };
+export { winstonLogger };

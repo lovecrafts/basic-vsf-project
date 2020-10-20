@@ -1,5 +1,3 @@
-import { logger } from './utils/lcLogger.js';
-
 export default {
   plugins: [
     './plugins/commercetools.js',
@@ -13,12 +11,7 @@ export default {
   },
   buildModules: [
     [
-      '@vue-storefront/nuxt', {
-        logger: {
-          verbosity: 'debug',
-          ...logger
-        }
-      }
+      '@vue-storefront/nuxt'
     ]
   ]
 }

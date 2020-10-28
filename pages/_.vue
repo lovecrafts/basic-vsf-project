@@ -6,7 +6,7 @@
 
 <script>
 import { ref } from '@vue/composition-api';
-import { apolloClient } from '@vue-storefront/commercetools-api';
+import { getSettings } from '@vue-storefront/commercetools-api';
 import { onSSR } from '@vue-storefront/core';
 import gql from 'graphql-tag';
 
@@ -18,13 +18,14 @@ const query = gql`
 `;
 
 export default {
-    setup(props, context) {
+    setup() {
         const result = ref(null);
         onSSR(async () => {
             await new Promise((resolve, reject) => {
                 setTimeout(resolve, 3000);
             });
-            result.value = await apolloClient.query({
+            const { client } = getSettings();
+            result.value = await client.query({
                 query,
                 fetchPolicy: 'no-cache',
             }).then(res => res.data.example);

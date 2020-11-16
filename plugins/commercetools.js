@@ -1,5 +1,5 @@
 import { setup } from '@vue-storefront/commercetools-api';
-import { Logger } from '@vue-storefront/core'
+import { Logger, registerIntegration } from '@vue-storefront/core'
 import { setContext } from 'apollo-link-context';
 import { ApolloLink, Observable } from 'apollo-link';
 
@@ -27,11 +27,13 @@ function createLink(req) {
     return ApolloLink.from([logLink, fakeLink]);
 }
 
-export default (context) => {
-    setup({
+export default registerIntegration((context) => {
+    const config = {
         api: {},
         customOptions: {
             link: createLink(context.req),
         },
-    });
-};
+    }
+
+    context.vsf.configure(setup(config))
+});
